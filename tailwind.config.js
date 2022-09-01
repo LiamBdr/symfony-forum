@@ -1,11 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-      './assets/**/*.{vue,js,jsx,ts,tsx}',
-      './templates/**/*.{html,twig}',
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
+    content: [
+        './assets/**/*.{vue,js,jsx,ts,tsx}',
+        './templates/**/*.{html,twig}',
+    ],
+    theme: {
+        extend: {},
+    },
+    plugins: [
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/typography'),
+    ],
 }
