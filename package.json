@@ -24,7 +24,7 @@
         "build": "encore production --progress"
     },
     "browserslist": [
-        "> 1%",
+        "> 2%",
         "last 2 versions",
         "not ie <= 11"
     ]

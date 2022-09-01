@@ -1,11 +1,9 @@
-body {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind screens;
 
-  h1 {
-    display: flex;
-    justify-content: space-between;
-    color: red;
-    transition: all ease 0.3s;
-    box-shadow: 0 0 10px rgba(black, 10%);
-  }
-
+h1 {
+  transition: all ease 0.3s;
 }
+
