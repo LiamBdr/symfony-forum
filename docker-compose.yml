@@ -4,12 +4,11 @@ services:
 ###> doctrine/doctrine-bundle ###
   database:
     image: 'mysql:latest'
-    restart: always
     environment:
         MYSQL_ROOT_PASSWORD: password
         MYSQL_DATABASE: main
     ports:
-      - '3306'
+      -  "3306:3306"
 
   phpmyadmin:
     image: phpmyadmin
