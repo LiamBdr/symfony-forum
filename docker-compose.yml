@@ -6,8 +6,8 @@ services:
     image: 'mysql:latest'
     restart: always
     environment:
-        MYSQL_ROOT_PASSWORD: root
-        MYSQL_DATABASE: docker_symfony_forum
+        MYSQL_ROOT_PASSWORD: password
+        MYSQL_DATABASE: main
     ports:
       - '3306'
 
