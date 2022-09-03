@@ -1,5 +1,5 @@
-<header>
-    <div class="mx-auto flex max-w-7xl items-center justify-between p-4 border-b">
+<header class="border-b">
+    <div class="mx-auto flex max-w-7xl items-center justify-between p-4">
         <div class="flex items-center space-x-4">
             <div class="flex items-center space-x-2">
                 <button class="flex appearance-none p-1 text-gray-500 md:hidden">
@@ -22,7 +22,7 @@
                 </a>
             </div>
             <nav class="hidden items-center space-x-2 text-sm font-medium text-gray-800 md:flex">
-                <button id="dropdownDefault" data-dropdown-toggle="dropdown"
+                <button id="mainNavDropdownBtn" data-dropdown-toggle="mainNavDropdown"
                         class="bg-white hover:bg-gray-100 focus:bg-gray-100 focus:outline-none rounded-xl px-2 py-2 ml-2 transition text-center inline-flex items-center"
                         type="button">
                     Articles
@@ -32,9 +32,9 @@
                 </button>
 
                 <!-- Dropdown menu -->
-                <div id="dropdown" class="z-10 border w-44 bg-white rounded-xl divide-y divide-gray-100 block hidden overflow-hidden"
+                <div id="mainNavDropdown" class="z-10 border w-44 bg-white rounded-xl divide-y divide-gray-100 block hidden overflow-hidden"
                      data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="right">
-                    <ul class="text-sm text-gray-700" aria-labelledby="dropdownDefault">
+                    <ul class="text-sm text-gray-700" aria-labelledby="mainNavDropdownBtn">
                         <li>
                             <a href="#" class="block py-2 px-4 hover:bg-gray-100">Rhum Antillais</a>
                         </li>

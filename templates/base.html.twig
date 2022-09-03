@@ -13,11 +13,18 @@
     {% endblock %}
 </head>
 <body>
+
+{% include 'admin-header.html.twig' %}
+
 {% include 'header.html.twig' %}
 
-{% block body %}
-{% endblock %}
+<main class="border-b bg-gray-50 w-screen">
+    {% block body %}
 
+    {% endblock %}
+</main>
+
+{% include 'footer.html.twig' %}
 
 </body>
 </html>
