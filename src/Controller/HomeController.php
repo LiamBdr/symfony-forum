@@ -14,7 +14,10 @@ class HomeController extends AbstractController
     public function index(ArticleRepository $articleRep): Response
     {
         return $this->render('home/index.html.twig', [
-            'articles' => $articleRep->findAll(),
-        ]);
+            'articles' => $articleRep->findBy(
+                [],
+                ['createdAt' => 'DESC'],
+                4
+            )]);
     }
 }

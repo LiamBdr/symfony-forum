@@ -4,8 +4,6 @@
 
 {% block body %}
 
-    <div class="min-h-screen mx-auto max-w-7xl px-4 pl-7 pt-12 pb-20">
-
         {# HERO SECTION #}
         <section>
             <div class="px-4 py-5 mb-10 mx-auto max-w-screen-xl text-center lg:px-12">
@@ -56,7 +54,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 fill-orange-500 mb-3">
                         <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
                     </svg>
-                    <dt class="text-3xl md:text-4xl font-extrabold">23</dt>
+                    <dt class="text-3xl md:text-4xl font-extrabold">{{ random(4, 35) }}</dt>
                     <dd class="font-light text-gray-500">rédacteurs</dd>
                 </div>
 
@@ -64,28 +62,24 @@
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 fill-orange-500 mb-3">
                         <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
                     </svg>
-                    <dt class="text-3xl md:text-4xl font-extrabold">812</dt>
+                    <dt class="text-3xl md:text-4xl font-extrabold">{{ random(100, 2000) }}</dt>
                     <dd class="font-light text-gray-500">membres</dd>
                 </div>
                 <div class="flex flex-col items-center justify-center bg-gray-100 rounded-xl py-5 border">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 fill-orange-500 mb-3">
                         <path fill-rule="evenodd" d="M4.804 21.644A6.707 6.707 0 006 21.75a6.721 6.721 0 003.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 01-.814 1.686.75.75 0 00.44 1.223zM8.25 10.875a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25zM10.875 12a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm4.875-1.125a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clip-rule="evenodd" />
                     </svg>
-                    <dt class="text-3xl md:text-4xl font-extrabold">2167</dt>
+                    <dt class="text-3xl md:text-4xl font-extrabold">{{ random(982, 4323) }}</dt>
                     <dd class="font-light text-gray-500">discussions</dd>
                 </div>
 
             </dl>
         </section>
 
+        {# ARTICLE LIST #}
         <section>
-
             <h1 class="pb-3 text-2xl font-bold text-gray-800 border-b sm:text-3xl">Nos derniers articles</h1>
-
+            {% include 'article/list.html.twig' with { articles } %}
         </section>
-
-    </div>
-
-
 
 {% endblock %}
