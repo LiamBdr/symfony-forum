@@ -1,0 +1,8 @@
+<div class="flex items-center gap-2">
+    {% for category in categories %}
+        <a href="{{ path('category_display', {slug: category.slug}) }}" class="bg-orange-500 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded hover:bg-orange-600 transition">
+            {{ category.icon|raw }}
+            {{ category.name }}
+        </a>
+    {% endfor %}
+</div>
