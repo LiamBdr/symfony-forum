@@ -4,7 +4,6 @@ namespace App\Controller\Admin;
 
 use App\Entity\Category;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ColorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -25,7 +24,7 @@ class CategoryCrudController extends AbstractCrudController
 
             TextField::new('description'),
 
-            ColorField::new('color'),
+            TextField::new('icon'),
         ];
     }
 }

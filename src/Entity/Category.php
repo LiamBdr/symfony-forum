@@ -21,8 +21,8 @@ class Category
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
-    #[ORM\Column(length: 10)]
-    private ?string $color = null;
+    #[ORM\Column(length: 255)]
+    private ?string $icon = null;
 
     #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'categories')]
     private Collection $articles;
@@ -64,16 +64,14 @@ class Category
         return $this;
     }
 
-    public function getColor(): ?string
+    public function getIcon(): ?string
     {
-        return $this->color;
+        return $this->icon;
     }
 
-    public function setColor(string $color): self
+    public function setIcon(?string $icon): void
     {
-        $this->color = $color;
-
-        return $this;
+        $this->icon = $icon;
     }
 
     /**
