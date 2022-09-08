@@ -3,12 +3,12 @@
 
 
     {% if article.featuredImage %}
-    <a href="{{ article_link }} ">
-        <img src="/uploads/{{ article.featuredImage.filename }}" alt="{{ article.featuredImage.altText }}"
-             class="rounded-xl max-h-40 h-100 w-full object-cover object-center mb-4"
-             loading="lazy"
-        >
-    </a>
+        <a href="{{ article_link }} ">
+            <img src="/uploads/{{ article.featuredImage.filename }}" alt="{{ article.featuredImage.altText }}"
+                 class="rounded-xl max-h-40 h-100 w-full object-cover object-center mb-4"
+                 loading="lazy"
+            >
+        </a>
     {% endif %}
 
     <div class="flex justify-between items-center mb-5 text-gray-500">
