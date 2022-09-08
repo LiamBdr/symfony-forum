@@ -1,0 +1,9 @@
+{% if (color is same as 'primary') %}
+    {% set colorClass = 'bg-orange-500 hover:bg-orange-600 text-white' %}
+{% else %}
+    {% set colorClass = 'border border-gray-300 hover:bg-gray-100 text-gray-900' %}
+{% endif %}
+
+<a href="{{ url }}" class="inline-flex justify-center items-center py-3 px-5 text-{{ size }} font-medium text-center rounded-lg {{ colorClass }}">
+    {{ label|raw }}
+</a>
