@@ -77,8 +77,14 @@
         </section>
 
         {# ARTICLE LIST #}
-        <section>
-            <h1 class="pb-3 text-2xl font-bold text-gray-800 border-b sm:text-3xl">Nos derniers articles</h1>
+        <section class="mt-8">
+
+            {{ component('section_header', {
+                'title' : 'Nos derniers articles',
+                'description' : 'Retouvez quelques articles fraichement publiés sur notre site',
+                'titleTag' : 'h2',
+            }) }}
+
             {% include 'article/list.html.twig' with { articles } %}
         </section>
 

@@ -196,14 +196,11 @@
     {# RECOMMANDED #}
     <aside aria-label="Related articles" class="py-8 lg:py-12 px-2 w-full">
 
-        <header class="pb-5 border-b">
-            <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:text-4xl">
-                Articles qui vont vous <span class="text-orange-500">plaire</span>
-            </h1>
-            <p class="text-gray-500 text-xl font-light">
-                Nos rédacteurs s'efforcent de vous proposer des articles de qualité, mis à jour régulièrement, pour enrichir toujours plus vos connaissances.
-            </p>
-        </header>
+        {{ component('section_header', {
+            'title' : ' Articles qui vont vous <span class="text-orange-500">plaire</span>',
+            'description' : 'Nos rédacteurs s\'efforcent de vous proposer des articles de qualité, mis à jour régulièrement, pour enrichir toujours plus vos connaissances.',
+            'titleTag' : 'h1',
+        }) }}
 
         <div class="grid gap-12 mt-5 sm:grid-cols-2 lg:grid-cols-4">
             <article class="max-w-xs">
