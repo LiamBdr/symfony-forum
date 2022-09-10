@@ -16,7 +16,7 @@ class HomeController extends AbstractController
             'articles' => $articleRep->findBy(
                 [],
                 ['createdAt' => 'DESC'],
-                4
+                6
             )]);
     }
 }
