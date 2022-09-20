@@ -21,7 +21,7 @@
                     {% if item.url is defined %}
                         <a href="{{ item.url }}" class="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2">{{ item.label }}</a>
                     {% else %}
-                        <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2">{{ item.label|length > 100 ? item.label|slice(0, 100) ~ '...' : item.label }}</span>
+                        <span class="line-clamp-1 ml-1 text-sm font-medium text-gray-500 md:ml-2">{{ item.label|length > 70 ? item.label|slice(0, 70) ~ '...' : item.label }}</span>
                     {% endif %}
                 </div>
             </li>

@@ -1,0 +1,34 @@
+{% set article_link = path('article_display', {'slug': article.slug}) %}
+<article class="max-w-xs">
+    {% if article.featuredImage %}
+        <a href="{{ article_link }} ">
+            <img src="/uploads/{{ article.featuredImage.filename }}" alt="{{ article.featuredImage.altText }}"
+                 class="rounded-xl max-h-40 w-full object-cover object-center mb-3"
+                 loading="lazy"
+            >
+        </a>
+    {% else %}
+        <a href="{{ article_link }} ">
+            <img src="https://images.unsplash.com/photo-1505739817823-dcf70eb5a3f7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+                 class="rounded-xl max-h-40 w-full object-cover object-center mb-3"
+                 loading="lazy"
+            >
+        </a>
+    {% endif %}
+
+    <h2 class="text-xl font-bold leading-tight text-gray-900 mb-2 hover:underline line-clamp-2">
+        <a href="{{ article_link }}">{{ article.title }}</a>
+    </h2>
+
+    <time class="block text-xs font-light text-gray-500 mb-2">{{ article.createdAt|format_datetime('long', 'none', locale='fr') }}</time>
+    <p class="mb-2 font-light text-gray-500 line-clamp-3">
+        {{ article.abstract ?: article.content|striptags|slice(0, 250) ~ '...' }}
+    </p>
+    <a href="{{ article_link }}" class="inline-flex items-center font-medium text-orange-500 hover:underline">
+        Lire la suite
+        <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clip-rule="evenodd"></path>
+        </svg>
+    </a>
+</article>
