@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Article;
 use App\Entity\Category;
+use App\Entity\Comment;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -46,6 +47,8 @@ class DashboardController extends AbstractDashboardController
                     ->setAction('new'),
                 MenuItem::linkToCrud('Catégories', 'fa fa-list', Category::class),
             ]),
+
+            MenuItem::linkToCrud('Commentaires', 'fa fa-comment', Comment::class),
 
             MenuItem::section(),
             MenuItem::linkToRoute('Retour au site', 'fa fa-door-open', 'app_home'),
