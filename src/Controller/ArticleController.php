@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Comment;
+use App\Form\Type\CommentType;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,6 +19,9 @@ class ArticleController extends AbstractController
         if (!$article) {
             return $this->redirectToRoute('app_home');
         }
+
+        $comment = new Comment($article);
+        $commentForm = $this->createForm(CommentType::class, $comment);
 
         //get categories of the current article
         $currentCategories = $article->getCategories();
@@ -76,9 +81,10 @@ class ArticleController extends AbstractController
 
         }
 
-        return $this->render('article/display.html.twig', [
+        return $this->renderForm('article/display.html.twig', [
             'article' => $article,
             'recommendedArticles' => $recommendedArticles,
+            'commentForm' => $commentForm,
         ]);
     }
 }
