@@ -4,24 +4,66 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Comment;
+use App\Entity\User;
 use App\Form\Type\CommentType;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ArticleController extends AbstractController
 {
+    private ArticleRepository $articleRepository;
+    private CategoryRepository $categoryRepository;
+    private ObjectManager $entityManager;
+
+    public function __construct(ArticleRepository $articleRepository, CategoryRepository $categoryRepository, ManagerRegistry $doctrine)
+    {
+        $this->articleRepository = $articleRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->entityManager = $doctrine->getManager();
+
+        date_default_timezone_set('Europe/Paris');
+    }
+
     #[Route('/article/{slug}', name: 'article_display')]
-    public function display(?Article $article, ArticleRepository $articleRepository, CategoryRepository $categoryRepository): Response
+    public function display(?Article $article, Request $request): Response
     {
         if (!$article) {
             return $this->redirectToRoute('app_home');
         }
 
         $comment = new Comment($article);
+        //get user id 1
+        $user = $this->entityManager->getRepository(User::class)->find(1);
+        $comment->setUser($user);
         $commentForm = $this->createForm(CommentType::class, $comment);
+
+        $commentForm->handleRequest($request);
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+
+            $this->entityManager->persist($comment);
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'Votre commentaire a bien été ajouté.');
+
+            return $this->redirectToRoute('article_display', ['slug' => $article->getSlug()]);
+        }
+
+        $recommendedArticles = $this::recommendedArticles($article);
+
+        return $this->renderForm('article/display.html.twig', [
+            'article' => $article,
+            'recommendedArticles' => $recommendedArticles,
+            'commentForm' => $commentForm,
+        ]);
+    }
+
+    private function recommendedArticles($article): array {
 
         //get categories of the current article
         $currentCategories = $article->getCategories();
@@ -33,9 +75,9 @@ class ArticleController extends AbstractController
 
         $availableArticles = [];
         $nbAvailableArticles = 0;
-        //get all articles of each categories
+        //get all articles of each current article categories
         foreach ($categoriesId as $catId) {
-            $availableArticles[$catId] = $categoryRepository->find($catId)->getArticles();
+            $availableArticles[$catId] = $this->categoryRepository->find($catId)->getArticles();
             $nbAvailableArticles += count($availableArticles[$catId]);
         }
 
@@ -69,7 +111,7 @@ class ArticleController extends AbstractController
                 }
             }
 
-            $allArticles = $articleRepository->findAll();
+            $allArticles = $this->articleRepository->findAll();
             $totalArticles = count($allArticles);
 
             while (count($recommendedArticles) < $nbrecommendedArticles) {
@@ -81,10 +123,7 @@ class ArticleController extends AbstractController
 
         }
 
-        return $this->renderForm('article/display.html.twig', [
-            'article' => $article,
-            'recommendedArticles' => $recommendedArticles,
-            'commentForm' => $commentForm,
-        ]);
+        return $recommendedArticles;
     }
+
 }

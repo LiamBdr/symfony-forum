@@ -1,0 +1,23 @@
+{# COMMENT FORM #}
+{{ form_start(commentForm, {
+    'attr': {'class': 'mb-6'}
+}) }}
+
+    {{ form_errors(commentForm) }}
+
+    <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
+        {{ form_label(commentForm.content, null, {
+            'label_attr': {'class': 'sr-only'}
+        }) }}
+        {{ form_widget(commentForm.content, {
+            'attr': {'class': 'px-0 w-full text-sm text-gray-900 border-0 focus:ring-0'}
+        }) }}
+    </div>
+
+    {{ form_widget(commentForm.send, {
+        'attr': {'class': 'inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-orange-500 rounded-lg focus:ring-4 focus:bg-orange-600 hover:bg-orange-800'}
+    }) }}
+
+    {{ form_rest(commentForm) }}
+
+{{ form_end(commentForm) }}

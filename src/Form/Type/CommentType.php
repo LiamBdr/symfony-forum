@@ -18,7 +18,9 @@ class CommentType extends AbstractType
             ->add('content', TextareaType::class, [
                 'label' => 'Commentaire',
                 'attr' => [
-                    'placeholder' => 'Votre commentaire',
+                    'placeholder' => 'Votre commentaire...',
+                    'rows' => 6,
+                    'required' => true,
                 ],
             ])
             ->add('send', SubmitType::class, [
