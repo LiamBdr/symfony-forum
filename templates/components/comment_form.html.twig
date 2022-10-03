@@ -1,0 +1,52 @@
+{# COMMENT FORM #}
+<div
+    {{ attributes }}
+    {#data-poll#}
+>
+
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-lg lg:text-2xl font-bold text-gray-900">
+            Discussion{{ this.allComments|length > 1 ? 's' : '' }} ({{ this.allComments|length }})
+        </h2>
+    </div>
+
+    {{ form_start(form, {
+        'attr': {
+            'class': 'mb-6',
+            'data-action': 'live#action',
+            'data-action-name': 'prevent|save'
+        }
+    }) }}
+
+    {{ form_errors(form) }}
+
+    <div class="pt-2 pb-8 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
+        {{ form_label(form.content) }}
+        {{ form_widget(form.content, {
+            'attr': {
+                'class': 'px-0 w-full text-sm text-gray-900 border-0 focus:ring-0',
+                'data-model': 'on(change)|commentContent'
+            }
+        }) }}
+        <p class="text-sm ml-auto inline float-right text-gray-400">
+            {{ this.commentContent|length }}/250
+        </p>
+    </div>
+
+    {{ form_widget(form.send, {
+        'attr': {
+            'class': 'inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-orange-500 rounded-lg focus:ring-4 focus:bg-orange-600 hover:bg-orange-800'
+        }
+    }) }}
+
+    {{ form_rest(form) }}
+
+    {{ form_end(form) }}
+
+    <div>
+        {% for comment in this.allComments %}
+            {{ component('comment_item', {'comment':comment }) }}
+        {% endfor %}
+    </div>
+
+</div>

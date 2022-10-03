@@ -1,4 +1,4 @@
-<article class="p-6 mb-6 text-base bg-white rounded-lg border">
+<article class="p-6 mb-6 text-base bg-white rounded-lg border" id="com-{{ comment.id }}">
 
     <footer class="flex justify-between items-center mb-2">
 
@@ -42,8 +42,8 @@
     </footer>
 
     {# CONTENT #}
-    <p>
-        {{ comment.content|e }}
+    <p class="break-words">
+        {{ comment.content|sanitize_html|nl2br }}
     </p>
 
     {# REPLY #}
