@@ -34,11 +34,12 @@ class ArticleController extends AbstractController
     public function display(?Article $article, Request $request): Response
     {
         if (!$article) {
-            return $this->redirectToRoute('app_home');
+            throw $this->createNotFoundException('Article not found');
         }
 
         $comment = new Comment($article);
-        //get user id 1
+        //TODO : get user id from session
+        //$comment->setUser($this->getUser());
         $user = $this->entityManager->getRepository(User::class)->find(1);
         $comment->setUser($user);
         $commentForm = $this->createForm(CommentType::class, $comment);

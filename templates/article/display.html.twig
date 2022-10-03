@@ -74,9 +74,10 @@
             </div>
 
             {# COMMENT FORM #}
-            {% include 'comment/form.html.twig' %}
+            {{ component('comment_form', {
+                'commentForm' : commentForm
+            }) }}
 
-{#            {% set comments = article.comments|sort( (a, b) => b.createdAt <=> a.createdAt )  %}#}
             {% for comment in article.comments %}
                 {{ component('comment_item', {'comment':comment }) }}
             {% endfor %}
