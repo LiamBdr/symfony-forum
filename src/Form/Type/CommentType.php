@@ -4,7 +4,6 @@ namespace App\Form\Type;
 
 use App\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,6 +20,7 @@ class CommentType extends AbstractType
                     'placeholder' => 'Votre commentaire...',
                     'rows' => 6,
                     'required' => true,
+                    'trim' => true,
                 ],
             ])
             ->add('send', SubmitType::class, [
