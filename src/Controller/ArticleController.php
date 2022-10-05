@@ -52,7 +52,7 @@ class ArticleController extends AbstractController
 
             $this->addFlash('success', 'Votre commentaire a bien été ajouté.');
 
-            return $this->redirectToRoute('article_display', ['slug' => $article->getSlug()]);
+            return $this->redirectToRoute('article_display', ['slug' => $article->getSlug(), '_fragment' => 'com-'.$comment->getId()]);
         }
 
         $recommendedArticles = $this::recommendedArticles($article);
