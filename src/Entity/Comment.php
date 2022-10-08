@@ -17,6 +17,12 @@ class Comment
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 3,
+        max: 50,
+        minMessage: 'Votre commentaire doit faire au minimum {{ limit }} caractères',
+        maxMessage: 'Votre commentaire doit faire au maximum {{ limit }} caractères',
+    )]
     private ?string $content = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
