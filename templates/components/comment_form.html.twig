@@ -23,7 +23,7 @@
 {% endif %}
 
 
-<div class="pt-2 pb-8 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
+<div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
     {{ form_label(commentForm.content, null, {
         'label_attr': {
             'class': 'text-sm font-medium text-gray-600'
@@ -34,7 +34,6 @@
             'class': 'px-0 w-full text-sm text-gray-900 border-0 focus:ring-0',
         }
     }) }}
-    <p>{{  }}</p>
 </div>
 
 {{ form_widget(commentForm.send, {
