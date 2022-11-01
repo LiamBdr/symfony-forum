@@ -35,7 +35,7 @@
                         }) }}
                         {{ form_widget(registrationForm.username, {
                             attr: {
-                                class: 'bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 '
+                                class: 'bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ',
                             }
                         }) }}
                         <div class="text-xs text-gray-500 mt-2">{{ form_help(registrationForm.username) }}</div>
@@ -49,12 +49,16 @@
                         }) }}
                         {{ form_widget(registrationForm.email, {
                             attr: {
-                                class: 'bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 '
+                                class: 'bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5',
+                                list: 'email-suggestions'
                             }
                         }) }}
+
+                        <datalist id="email-suggestions">
+                        </datalist>
                     </div>
 
-                    <div>
+                    <div class="relative">
                         {{ form_label(registrationForm.plainPassword.children.first, null, {
                             label_attr: {
                                 class: 'block mb-2 text-sm font-medium text-gray-900'
@@ -62,12 +66,19 @@
                         }) }}
                         {{ form_widget(registrationForm.plainPassword.children.first, {
                             attr: {
-                                class: 'bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 '
+                                class: 'bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5',
+                                id: 'new-password'
                             }
                         }) }}
+                        <svg id="show-password-first" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                             class="w-5 h-5 absolute right-3 bottom-2.5 text-gray-400 hover:text-gray-500 cursor-pointer select-none">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
                     </div>
 
-                    <div>
+                    <div class="relative">
                         {{ form_label(registrationForm.plainPassword.children.second, null, {
                             label_attr: {
                                 class: 'block mb-2 text-sm font-medium text-gray-900'
@@ -75,9 +86,17 @@
                         }) }}
                         {{ form_widget(registrationForm.plainPassword.children.second, {
                             attr: {
-                                class: 'bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5'
+                                class: 'bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5',
+                                id: 'new-password',
+                                placeholder: 'Confirmer le mot de passe'
                             }
                         }) }}
+                        <svg id="show-password-second" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                             class="w-5 h-5 absolute right-3 bottom-2.5 text-gray-400 hover:text-gray-500 cursor-pointer select-none">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
                     </div>
 
                     <div class="flex items-start">
@@ -97,13 +116,29 @@
                         </div>
                     </div>
 
+                        <p class="mt-2 text-xs text-red-600">{{ form_errors(registrationForm) }}</p>
+
+                    {% if not registrationForm.vars.valid %}
+                        <ul>
+                            {# Loop through every registrationForm item #}
+                            {% for child in registrationForm.children %}
+                                {# Display the errors of the registrationForm item #}
+                                {%for error in child.vars.errors%}
+                                    <p class="text-sm text-red-600">{{ error.message }}</p>
+                                {%endfor%}
+                            {%endfor%}
+                        </ul>
+                    {%endif%}
+
                     <button type="submit" class="w-full text-white bg-orange-500 hover:bg-orange-600 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                         Créer votre compte
                     </button>
 
-                    <p class="text-sm font-light text-gray-500">
+                    <p class="text-sm font-light text-gray-500 text-center">
                         Vous avez déjà un compte ? <a href="{{ path('app_login') }}" class="font-medium text-orange-500 hover:underline">Connectez vous ici</a>
                     </p>
+
+                    {{ form_rest(registrationForm) }}
 
                     {{ form_end(registrationForm) }}
                 </div>
@@ -112,3 +147,8 @@
     </section>
 
 {% endblock %}
+
+ {% block javascripts %}
+     {{ parent() }}
+     {{ encore_entry_script_tags('inscription') }}
+ {% endblock %}
