@@ -25,6 +25,7 @@
                         {{ form_widget(registrationForm.username, {
                             attr: {
                                 class: 'bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ',
+                                autofocus: true
                             }
                         }) }}
                         <div class="text-xs text-gray-500 mt-2">{{ form_help(registrationForm.username) }}</div>
@@ -121,7 +122,7 @@
                         Créer votre compte
                     </button>
 
-                    <p class="text-sm font-light text-gray-500 text-center">
+                    <p class="text-sm font-light text-gray-500">
                         Vous avez déjà un compte ? <a href="{{ path('app_login') }}" class="font-medium text-orange-500 hover:underline">Connectez vous ici</a>
                     </p>
 
