@@ -26,8 +26,8 @@ class RegistrationFormType extends AbstractType
                     'placeholder' => 'Votre nom d\'utilisateur',
                     'autocomplete' => 'username',
                     'aria-autocomplete' => 'list',
+                    'autofocus' => true,
                 ],
-                'help' => 'Votre pseudonyme sera visible par tous les utilisateurs.',
             ])
             ->add('email', EmailType::class, [
                 'label' => 'Email',
@@ -37,11 +37,16 @@ class RegistrationFormType extends AbstractType
                     'aria-describedby' => 'emailHelp',
                     'aria-autocomplete' => 'list',
                 ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez entrer une adresse email',
+                    ]),
+                ],
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'mapped' => false,
-                'invalid_message' => 'The password fields must match.',
+                'invalid_message' => 'Les mots de passe doivent correspondre.',
                 'options' => ['attr' => [
                     'class' => 'password-field',
                     'autocomplete' => 'new-password',
@@ -51,14 +56,13 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'first_options' => ['label' => 'Mot de passe'],
                 'second_options' => ['label' => 'Répéter le mot de passe'],
-                'empty_data' => 'Mot de passe',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Veuillez entrer un mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
                         'max' => 4096,
                     ]),
                 ],
@@ -67,7 +71,7 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Veuillez accepter les conditions d\'utilisation.',
                     ]),
                 ],
             ]);

@@ -24,7 +24,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank]
     #[Assert\Length(
         min: 4,
-        max: 45,
+        max: 55,
         minMessage: 'Votre nom d\'utilisateur doit faire au minimum {{ limit }} caractères',
         maxMessage: 'Votre nom d\'utilisateur doit faire au maximum {{ limit }} caractères',
     )]

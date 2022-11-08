@@ -1,23 +1,25 @@
 let emailInput = document.querySelector('input[type="email"]');
 let emailSuggestions = document.querySelector('datalist#email-suggestions');
 
-emailInput.addEventListener('input', function (e) {
-    let value = e.target.value;
+if (emailInput !== null) {
+    emailInput.addEventListener('input', function (e) {
+        let value = e.target.value;
 
-    if (value.includes('@')) {
-        let name = value.split('@')[0];
-        let suggestions = ['@gmail.com', '@hotmail.fr', '@yahoo.fr', '@outlook.fr', '@orange.fr', '@laposte.net'];
+        if (value.includes('@')) {
+            let name = value.split('@')[0];
+            let suggestions = ['@gmail.com', '@hotmail.fr', '@yahoo.fr', '@outlook.fr', '@orange.fr', '@laposte.net'];
 
-        emailSuggestions.innerHTML = '';
+            emailSuggestions.innerHTML = '';
 
-        suggestions.forEach(function (suggestion) {
-            let option = document.createElement('option');
-            option.value = name + suggestion;
-            emailSuggestions.appendChild(option);
-        });
-    }
+            suggestions.forEach(function (suggestion) {
+                let option = document.createElement('option');
+                option.value = name + suggestion;
+                emailSuggestions.appendChild(option);
+            });
+        }
 
-});
+    });
+}
 
 document.querySelectorAll('input[type="password"]').forEach(function (input) {
 
