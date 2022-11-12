@@ -4,8 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Comment;
-use App\Entity\User;
-use App\Form\Type\CommentType;
+use App\Form\CommentType;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -38,15 +37,13 @@ class ArticleController extends AbstractController
         }
 
         $comment = new Comment($article);
-        //TODO : get user id from session
-        //$comment->setUser($this->getUser());
-        $user = $this->entityManager->getRepository(User::class)->find(1);
-        $comment->setUser($user);
         $commentForm = $this->createForm(CommentType::class, $comment);
 
         $commentForm->handleRequest($request);
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
 
+            $comment->setUser($this->getUser());
             $this->entityManager->persist($comment);
             $this->entityManager->flush();
 

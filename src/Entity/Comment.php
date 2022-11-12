@@ -15,11 +15,13 @@ class Comment
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Assert\NotBlank]
+    #[ORM\Column(type: Types::TEXT, nullable: false)]
+    #[Assert\NotBlank(
+        message: 'Le commentaire ne peut pas être vide'
+    )]
     #[Assert\Length(
         min: 3,
-        max: 50,
+        max: 450,
         minMessage: 'Votre commentaire doit faire au minimum {{ limit }} caractères',
         maxMessage: 'Votre commentaire doit faire au maximum {{ limit }} caractères',
     )]
