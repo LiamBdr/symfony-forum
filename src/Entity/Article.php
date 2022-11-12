@@ -4,12 +4,14 @@ namespace App\Entity;
 
 use App\Model\TimestampedInterface;
 use App\Repository\ArticleRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Article implements TimestampedInterface
 {
     #[ORM\Id]
@@ -48,6 +50,13 @@ class Article implements TimestampedInterface
     {
         $this->categories = new ArrayCollection();
         $this->comments = new ArrayCollection();
+    }
+
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function setSlugValue(): void
+    {
+        $this->slug = (new Slugify())->slugify($this->title);
     }
 
     public function getId(): ?int

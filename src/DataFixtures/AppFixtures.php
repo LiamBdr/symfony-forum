@@ -13,6 +13,8 @@ use Faker;
 
 class AppFixtures extends Fixture
 {
+    private HttpClientInterface $client;
+
     public function __construct(HttpClientInterface $client)
     {
         $this->client = $client;
@@ -26,7 +28,6 @@ class AppFixtures extends Fixture
             $category = new Category();
 
             $category->setName(ucfirst($faker->word));
-            $category->setSlug($this->slugify($category->getName()));
 
             //random emoji api
             $response = $this->client->request(
@@ -47,7 +48,6 @@ class AppFixtures extends Fixture
             $article = new Article();
 
             $article->setTitle(ucfirst($faker->sentence(10, false)));
-            $article->setSlug($this->slugify($article->getTitle()));
             $article->setContent($faker->paragraph(50));
             $article->setCreatedAt($faker->dateTimeBetween('-6 months'));
             $article->setUpdatedAt($faker->dateTimeBetween('-6 months'));
@@ -63,21 +63,5 @@ class AppFixtures extends Fixture
         }
 
         $manager->flush();
-    }
-
-    private static function slugify($text, string $divider = '-')
-    {
-        $text = preg_replace('~[^\pL\d]+~u', $divider, $text);
-        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
-        $text = preg_replace('~[^-\w]+~', '', $text);
-        $text = trim($text, $divider);
-        $text = preg_replace('~-+~', $divider, $text);
-        $text = strtolower($text);
-
-        if (empty($text)) {
-            return 'n-a';
-        }
-
-        return $text;
     }
 }
